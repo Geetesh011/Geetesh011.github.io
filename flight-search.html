@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flight Search</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.1/css/all.min.css" />
+    <link rel="stylesheet" href="flight-search.css">
+    <link rel="stylesheet" href="new.css">
+    <style>
+        input[type="text"]:hover, input[type="date"]:hover, select:hover {
+            border-color: #add8e6; 
+        }
+    </style>
+</head>
+
+<body>
+    <header class="header">
+        <div class="topbar"></div>
+        <div class="meanu-sec py-3">
+            <div class="container">
+                <div class="logo"><img src="images.png" alt="Travel Logo"></div>
+                <div class="desk-menu">
+                    <ul class="flex-menus">
+                        <li><a href="new.html#home">Home</a></li>
+                        <li><a href="new.html#destinations">Destinations</a></li>
+                        <li><a href="new.html#travel-guide-section">Travel Guide</a></li>
+                        <li><a href="new.html#contact us">Contact Us</a></li>
+                        <button onclick="location.href='login.html'" class="btn">Login</button>
+                        <button onclick="location.href='signup.html'" class="btn3">Sign Up</button>
+                    </ul>
+                </div>
+                
+                <div class="mobile-menu-icon d-block d-md-none">
+                    <i class="fa-solid fa-bars" id="menuToggle"></i>
+                </div>
+            </div>
+        </div>
+        
+        <div class="mobile-menu d-none" id="mobileMenu">
+            <ul>
+                <li><a href="new.html#home">Home</a></li>
+                <li><a href="new.html#destinations">Destinations</a></li>
+                <li><a href="new.html#travel-guide-section">Travel Guide</a></li>
+                <li><a href="new.html#contact us">Contact Us</a></li>
+                <li><button onclick="location.href='login.html'" class="btn">Login</button></li>
+                <li><button onclick="location.href='signup.html'" class="btn3">Sign Up</button></li>
+            </ul>
+        </div>
+    </header>
+
+    <section class="flight-search-sec py-5">
+        <div class="container">
+            <h3 class="title text-center">Find Your Flight</h3>
+            <p class="text-center">Search for flights between destinations and find the best deals</p>
+            <div class="flight-search-container">
+                <div class="search-form">
+                    <div class="row">
+                        <div class="col-md-5">
+                            <div class="form-group">
+                                <label for="fromCity"><i class="fa-solid fa-plane-departure"></i> From</label>
+                                <input type="text" id="fromCity" class="form-control" placeholder="Enter departure city">
+                                <div id="fromSuggestions" class="suggestions"></div>
+                            </div>
+                        </div>
+                        <div class="col-md-2 text-center d-flex align-items-center justify-content-center">
+                            <div class="swap-icon">
+                                <i class="fa-solid fa-right-left"></i>
+                            </div>
+                        </div>
+                        <div class="col-md-5">
+                            <div class="form-group">
+                                <label for="toCity"><i class="fa-solid fa-plane-arrival"></i> To</label>
+                                <input type="text" id="toCity" class="form-control" placeholder="Enter destination city">
+                                <div id="toSuggestions" class="suggestions"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row mt-4">
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label for="departDate"><i class="fa-solid fa-calendar"></i> Depart Date</label>
+                                <input type="date" id="departDate" class="form-control">
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label for="returnDate"><i class="fa-solid fa-calendar-check"></i> Return Date</label>
+                                <input type="date" id="returnDate" class="form-control">
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label for="passengers"><i class="fa-solid fa-users"></i> Passengers</label>
+                                <select id="passengers" class="form-control">
+                                    <option value="1">1 Passenger</option>
+                                    <option value="2">2 Passengers</option>
+                                    <option value="3">3 Passengers</option>
+                                    <option value="4">4 Passengers</option>
+                                    <option value="5">5+ Passengers</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row mt-4">
+                        <div class="col-12 text-center">
+                            <button id="searchBtn" class="search-btn">Search Flights</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="flightResults" class="flight-results mt-5">
+                <h4 class="results-title">Available Flights</h4>
+                <div id="noResults" class="no-results">
+                    <p>Please search for flights to see available options.</p>
+                </div>
+                <div id="resultsContainer" class="results-container"> 
+                </div>
+            </div>
+        </div>
+    </section>
+
+    
+    <footer class="footer bg-color">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-3">
+                    <div class="footer-box">
+                        <div class="footer-img mb-3"><img src="images.png" alt="Travel Logo" width=""></div>
+                    </div>
+                    <p>Your trusted partner for finding the best flight deals worldwide. Travel with confidence and comfort.</p>
+                </div>
+                <div class="col-lg-3">
+                    <div class="f-title"><h5>Quick Links</h5></div>
+                    <div class="footer-links">
+                        <ul>
+                            <li><a href="">Flight Search</a></li>
+                            <li><a href="">Destinations</a></li>
+                            <li><a href="">About Us</a></li>
+                            <li><a href="">Travel Insurance</a></li>
+                            <li><a href="">Travel Guides</a></li>
+                        </ul>
+                    </div>
+                </div>
+               
+                <div class="col-lg-3">
+                    <div class="f-title"><h5>Contact Us</h5></div>
+                    <div class="footer-content">
+                        <i class="fa-solid fa-phone"></i>
+                        <div class="">
+                            <a href="tel:">1-800-TRAVEL-TRIP</a>
+                        </div>
+                    </div>
+                    <div class="footer-content">
+                        <i class="fa-solid fa-envelope"></i>
+                        <div class="">
+                            <a href="mailto:">support@travel.com</a>
+                        </div>
+                    </div>
+                    <div class="footer-content">
+                        <i class="fa-solid fa-location-dot"></i>
+                        <div class="">
+                            <a href="#">123 Travel Plaza, New York, NY</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <section class="copyright">
+        <div class="container">
+            <div class="d-flex justify-content-between align-items-center">
+                <p>Copyright © 2025 Travel. All rights reserved</p>
+                <ul class="social-icons">
+                    <li><a href=""><i class="fab fa-facebook-f"></i></a></li>
+                    <li><a href=""><i class="fab fa-instagram"></i></a></li>
+                    <li><a href=""><i class="fab fa-twitter"></i></a></li>
+                    <li><a href=""><i class="fab fa-linkedin-in"></i></a></li>
+                </ul>
+            </div>
+        </div>
+    </section>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="flight-script.js"></script>
+</body>
+</html>
+

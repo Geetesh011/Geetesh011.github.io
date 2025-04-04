@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flight Results</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.1/css/all.min.css" />
+    <link rel="stylesheet" href="flight-search.css">
+    <style>
+        
+        @media (max-width: 768px) {
+            .flight-card-horizontal {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                text-align: center;
+            }
+
+            .flight-info-horizontal {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                margin-bottom: 1rem;
+            }
+
+            .flight-line .line {
+                display: none;
+            }
+
+            .flight-prices {
+                margin-bottom: 1rem;
+            }
+
+            .flight-buttons {
+                display: flex;
+                flex-direction: column;
+                gap: 0.5rem;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .title {
+                font-size: 1.5rem;
+            }
+
+            .flight-card-horizontal {
+                padding: 1rem;
+            }
+
+            .flight-prices .price span {
+                display: block;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <header class="header">
+        
+    </header>
+
+    <section class="flight-results-sec py-5">
+        <div class="container">
+            <h3 class="title text-center">Available Flights</h3>
+            <div id="resultsContainer" class="results-container mt-4">
+                
+            </div>
+        </div>
+    </section>
+
+   
+    <section class="booking-history-sec py-5">
+        <div class="container">
+            <h3 class="title text-center">Your Cart</h3>
+            <div id="bookingHistory" class="results-container mt-4">
+                
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer bg-color">
+       
+    </footer>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const resultsContainer = document.getElementById("resultsContainer");
+            const bookingHistory = document.getElementById("bookingHistory");
+
+            
+            const searchParams = JSON.parse(localStorage.getItem("searchParams"));
+            const searchResults = JSON.parse(localStorage.getItem("searchResults"));
+            let bookingHistoryData = JSON.parse(localStorage.getItem("bookingHistory")) || [];
+
+            if (!searchParams || !searchResults) {
+                resultsContainer.innerHTML = "<p>No search results found. Please go back and search again.</p>";
+                return;
+            }
+
+            if (searchResults.length === 0) {
+                resultsContainer.innerHTML = `<p>No flights found from ${searchParams.fromCity} to ${searchParams.toCity}. Please try different cities.</p>`;
+                return;
+            }
+
+            
+            searchResults.forEach((flight) => {
+                const flightCard = document.createElement("div");
+                flightCard.className = "flight-card-horizontal";
+                flightCard.innerHTML = `
+                    <div class="flight-info-horizontal">
+                        <div class="flight-time">
+                            <span class="location">${flight.from}</span>
+                            <span class="time">${flight.departureTime}</span>
+                        </div>
+                        <div class="flight-line">
+                            <span class="duration">${flight.duration}</span>
+                            <div class="line"></div>
+                        </div>
+                        <div class="flight-time">
+                            <span class="time">${flight.arrivalTime}</span>
+                            <span class="location">${flight.to}</span>
+                        </div>
+                    </div>
+                    <div class="flight-prices text-center">
+                        <div class="price">
+                            <span>Economy</span>
+                            <span>₹${flight.price}</span>
+                        </div>
+                        <div class="price">
+                            <span>Business</span>
+                            <span>₹${(flight.price * 4).toLocaleString()}</span>
+                        </div>
+                    </div>
+                    <div class="flight-buttons">
+                        <button class="add-to-cart-btn">Add to Cart</button>
+                        <button class="select-flight-btn">Select Flight</button>
+                    </div>
+                `;
+                resultsContainer.appendChild(flightCard);
+
+
+                const addToCartBtn = flightCard.querySelector(".add-to-cart-btn");
+                addToCartBtn.addEventListener("click", () => {
+                    
+                    bookingHistoryData.push(flight);
+                    localStorage.setItem("bookingHistory", JSON.stringify(bookingHistoryData));
+
+                    
+                    displayBookingHistory();
+                });
+
+                const selectFlightBtn = flightCard.querySelector(".select-flight-btn");
+                selectFlightBtn.addEventListener("click", () => {
+                    window.location.href = 'Cart.html';
+                });
+            });
+
+            function displayBookingHistory() {
+                bookingHistory.innerHTML = "";
+
+                if (bookingHistoryData.length === 0) {
+                    bookingHistory.innerHTML = "<p>No booking history available.</p>";
+                    return;
+                }
+
+                bookingHistoryData.forEach((flight, index) => {
+                    const historyCard = document.createElement("div");
+                    historyCard.className = "flight-card-horizontal";
+                    historyCard.innerHTML = `
+                        <div class="flight-info-horizontal">
+                            <div class="flight-time">
+                                <span class="location">${flight.from}</span>
+                                <span class="time">${flight.departureTime}</span>
+                            </div>
+                            <div class="flight-line">
+                                <span class="duration">${flight.duration}</span>
+                                <div class="line"></div>
+                            </div>
+                            <div class="flight-time">
+                                <span class="time">${flight.arrivalTime}</span>
+                                <span class="location">${flight.to}</span>
+                            </div>
+                        </div>
+                        <div class="flight-prices text-center">
+                            <div class="price">
+                                <span>Economy</span>
+                                <span>₹${flight.price}</span>
+                            </div>
+                            <div class="price">
+                                <span>Business</span>
+                                <span>₹${(flight.price * 4).toLocaleString()}</span>
+                            </div>
+                        </div>
+                        <div class="flight-buttons">
+                            <button class="remove-flight-btn" data-index="${index}">Remove</button>
+                        </div>
+                    `;
+                    bookingHistory.appendChild(historyCard);
+                });
+
+                const removeButtons = bookingHistory.querySelectorAll(".remove-flight-btn");
+                removeButtons.forEach((button) => {
+                    button.addEventListener("click", (e) => {
+                        const index = e.target.getAttribute("data-index");
+                        bookingHistoryData.splice(index, 1);
+                        localStorage.setItem("bookingHistory", JSON.stringify(bookingHistoryData));
+                        displayBookingHistory();
+                    });
+                });
+            }
+
+            displayBookingHistory();
+        });
+    </script>
+</body>
+</html>
