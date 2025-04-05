@@ -22,7 +22,7 @@
             height: calc(100% - 100px);
         }
         .login-form {
-            background: rgba(255, 255, 255, 0.85); /* Decreased opacity */
+            background: rgba(255, 255, 255, 0.85); 
             border-radius: 10px; 
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
         }
@@ -57,7 +57,7 @@
                                     <label class="form-check-label" for="rememberMe">Remember me</label>
                                 </div>
                             </div>
-                            <button type="submit" class="btn btn-primary w-100">Login</button>
+                            <button type="submit" class="btn btn-primary w-100" id="loginButton">Login</button>
                             <p class="text-center mt-3">Don't have an account? <a href="signup.html">Sign Up</a></p>
                         </form>
                     </div>
@@ -65,5 +65,11 @@
             </div>
         </div>
     </section>
+    <script>
+        document.getElementById('loginButton').addEventListener('click', function(event) {
+            event.preventDefault(); // Prevent form submission
+            alert('Logged in successfully');
+        });
+    </script>
 </body>
 </html>
