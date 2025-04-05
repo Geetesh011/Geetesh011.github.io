@@ -63,7 +63,7 @@
                                 <label for="confirmPassword">Confirm Password</label>
                                 <input type="password" class="form-control" id="confirmPassword" placeholder="Confirm Password">
                             </div>
-                            <button type="submit" class="btn btn-primary w-100">Sign Up</button>
+                            <button type="submit" class="btn btn-primary w-100" id="signupButton">Sign Up</button>
                             <p class="text-center mt-3">Already have an account? <a href="login.html">Login</a></p>
                         </form>
                     </div>
@@ -71,5 +71,11 @@
             </div>
         </div>
     </section>
+    <script>
+        document.getElementById('signupButton').addEventListener('click', function(event) {
+            event.preventDefault(); // Prevent form submission
+            alert('Signed in successfully');
+        });
+    </script>
 </body>
 </html>
