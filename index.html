@@ -430,7 +430,7 @@
     </section>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
     <script>
-    // Email validation for subscription form
+  
     function validateSubscription(event) {
         event.preventDefault();
         const emailInput = document.getElementById("subscribeEmail").value.trim();
@@ -450,17 +450,14 @@
         document.getElementById("subscribeEmail").value = "";
     }
 
-    // Mobile menu toggle functionality
     document.addEventListener("DOMContentLoaded", function() {
         const menuToggle = document.getElementById("menuToggle");
         const mobileMenu = document.getElementById("mobileMenu");
         
-        // Toggle menu when hamburger icon is clicked
         menuToggle.addEventListener("click", function() {
             mobileMenu.classList.toggle("show");
         });
-        
-        // Close menu when clicking outside of it
+       
         document.addEventListener("click", function(event) {
             const isClickInsideMenu = mobileMenu.contains(event.target);
             const isClickOnToggle = menuToggle.contains(event.target);
@@ -470,7 +467,7 @@
             }
         });
         
-        // Close menu when clicking on a menu item
+  
         const menuItems = mobileMenu.querySelectorAll("a");
         menuItems.forEach(item => {
             item.addEventListener("click", function() {
@@ -478,7 +475,7 @@
             });
         });
         
-        // Handle window resize
+        
         window.addEventListener("resize", function() {
             if (window.innerWidth > 767) {
                 mobileMenu.classList.remove("show");
