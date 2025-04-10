@@ -73,7 +73,29 @@
     </section>
     <script>
         document.getElementById('signupButton').addEventListener('click', function(event) {
-            event.preventDefault(); 
+            event.preventDefault();
+            const firstName = document.getElementById('firstName').value.trim();
+            const lastName = document.getElementById('lastName').value.trim();
+            const email = document.getElementById('email').value.trim();
+            const password = document.getElementById('password').value.trim();
+            const confirmPassword = document.getElementById('confirmPassword').value.trim();
+
+            if (!firstName || !lastName || !email || !password || !confirmPassword) {
+                alert('Please fill in all fields.');
+                return;
+            }
+
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (!emailRegex.test(email)) {
+                alert('Please enter a valid email address.');
+                return;
+            }
+
+            if (password !== confirmPassword) {
+                alert('Passwords do not match.');
+                return;
+            }
+
             alert('Signed in successfully');
         });
     </script>
