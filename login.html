@@ -68,6 +68,20 @@
     <script>
         document.getElementById('loginButton').addEventListener('click', function(event) {
             event.preventDefault();
+            const email = document.getElementById('email').value.trim();
+            const password = document.getElementById('password').value.trim();
+
+            if (!email || !password) {
+                alert('Please fill in all fields.');
+                return;
+            }
+
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (!emailRegex.test(email)) {
+                alert('Please enter a valid email address.');
+                return;
+            }
+
             alert('Logged in successfully');
         });
     </script>
